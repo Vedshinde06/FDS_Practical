@@ -9,9 +9,8 @@ def shellSort(arr):
                 arr[j] = arr[j - gap]
                 j -= gap
             arr[j] = temp
-        gap = gap // 2
+        gap //= 2
     return arr
-
 
 def insertion_sort(arr):
     for i in range(1, len(arr)):
@@ -23,51 +22,42 @@ def insertion_sort(arr):
         arr[j + 1] = key
     return arr
 
-
 def top_five(arr):
-    print("Top five scores are : ")
+    print("Top five scores are:")
     cnt = len(arr)
-    if cnt < 5:
-        start, stop = cnt - 1, -1
-    else:
-        start, stop = cnt - 1, cnt - 6
-    for i in range(start, stop, -1):
-        print("\t{0:2f}".format(arr[i]), end=" ")
-
-
-arr = []
-Num = int(input("Enter the number of students: "))
-for i in range(Num):
-    per = float(input("Enter the mark of student " + str(i + 1) + ":"))
-    arr.append(per)
-
+    sorted_arr = sorted(arr, reverse=True)  # Sort array in descending order
+    for i in range(min(5, cnt)):
+        print(f"\t{sorted_arr[i]:.2f}")
 
 def main():
-    print("1. shellsort")
-    print("2. insertionsort")
-    print("3. display top five marks")
-    print("4. exit")
-    choice = int(input("Enter choice for sort: "))
-    if choice == 1:
-        insertion_sort(arr)
-        print("Sorted Array:")
-        m = []
-        for i in range(len(arr)):
-            m.append(arr)
-        print(m)
-    elif choice == 2:
-        shellSort(arr)
-        print("Sorted Array is:")
-        n = []
-        for i in range(len(arr)):
-            n.append(arr)
-        print(n)
-    elif choice == 3:
-        top_five(arr)
-    elif choice == 4:
-        exit()
-    else:
-        print("Enter valid input : ")
+    arr = []
+    num = int(input("Enter the number of students: "))
+    for i in range(num):
+        per = float(input(f"Enter the marks of student {i + 1}: "))
+        arr.append(per)
 
+    while True:
+        print("\nMenu:")
+        print("1. Shell Sort")
+        print("2. Insertion Sort")
+        print("3. Display Top Five Marks")
+        print("4. Exit")
 
-main()
+        choice = int(input("Enter your choice: "))
+
+        if choice == 1:
+            shellSort(arr)
+            print("Sorted Array:", arr)
+        elif choice == 2:
+            insertion_sort(arr)
+            print("Sorted Array:", arr)
+        elif choice == 3:
+            top_five(arr)
+        elif choice == 4:
+            print("Exiting...")
+            break
+        else:
+            print("Invalid input. Please try again.")
+
+if __name__ == "__main__":
+    main()
